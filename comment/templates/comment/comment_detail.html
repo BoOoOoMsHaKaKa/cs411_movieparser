@@ -1,0 +1,26 @@
+{% extends "movie/base.html" %}
+{% block content %}
+
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ object.author }}</a>
+              <small class="text-muted">{{ object.post_date|date:"F d, Y" }}</small>
+              {% if object.author == user %}
+                <a class="btn btn-secondary btn-sm mt-3 mb-3"href = "{% url 'comment_update' comment.id %}"> Update Comment</a>
+                <a class="btn btn-secondary btn-sm mt-3 mb-3"href = "{% url 'comment_delete' comment.id %}"> Delete Comment</a>
+
+              {% endif %}
+            </div>
+            <h1> Movie: {{object.movie_commented}}</h1>
+            <h2 class="article-title" > Title:{{ object.comment_title }}</h2>
+            <p class="article-content">{{ object.content }}</p>
+          </div>
+        </article>
+        <div class="border-top pt-3">
+          <small class="text-muted">
+            Post Another Comment? <a class = "ml-2" href = "{% url 'comment_create' %}"> Make new Comment</a>
+          </small>
+        </div>
+{% endblock content %}

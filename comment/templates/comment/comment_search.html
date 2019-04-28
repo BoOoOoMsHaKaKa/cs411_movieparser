@@ -1,0 +1,25 @@
+{% extends "movie/base.html" %}
+{% block content %}
+    <div class="content-section">
+      <form class="" action="/comment/search/" method="get">
+        <input type ="text" name="q" >
+        <input type = "submit" value = "comment_search">
+      </form>
+      <h3> {{ exists}}</h3>
+      {% for comment in results %}
+      <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ comment.author.profile.image.url }}">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ comment.author }}</a>
+            <small class="text-muted">{{ comment.post_date|date:"F d, Y" }}</small>
+          </div>
+          <h1> Movie: {{comment.movie_commented}}</h1>
+          <h2><a class="article-title" href="{% url 'comment_detail' comment.id %}"> Title:{{ comment.comment_title }}</a></h2>
+          <p class="article-content">{{ comment.content }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+{% endblock content %}
